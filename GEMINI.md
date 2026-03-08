@@ -132,19 +132,32 @@ Plugin updates via git.
 ---
 
 ## 14. 📜 Rules
-From `rules/agent-rules.yaml`:
+From `rules/agent-rules.yaml` & `.opencode/rules.md`:
+- **Default Baseline**: The default rule file is `GEMINI.md`. Consider its contents on every single request.
+- **Skill Validation**: By understanding the user request/prompt, validate whether available skills are related and/or necessary to aid in successfully answering the request.
+- **SaaS Architecture Guidelines**: When working on SaaS projects, adhere strictly to scalable best practices (TDD, decoupled components).
 - **Block**: commit secrets (grep check).  
 - **Warn**: missing tests for new features.  
 - **Approval**: before `git commit`, `git push`, `rm`, deploy.
 
-Agent must check rules before any action; if blocked, abort; if approval, call `request_approval`.
+Agent must check rules before any action; if blocked, abort; if approval, call `request_approval` natively.
 
 ---
 
-## 15. 📝 Revision History
+## 15. 📦 NPM Installation & Distribution
+This framework can be dynamically installed via NPM: `npx agentic-coding-plugin`.
+1. **Core Scaffolding**: It copies `memory/`, `skills/`, `tasks/`, `rules/`, `workflows/`, `mcp/`, `browser/`, `artifacts/`, and `.opencode/` logic into the root user directory dynamically.
+2. **Execution**: The `.opencode/config.yaml` points native workflows at the new path locations seamlessly for the user.
+3. **Artifact Integration**: Antigravity-like markdown artifacts are persisted into the `artifacts/` folder utilizing the custom `skills/memory/create_artifact.js` tool.
+4. **Default LLM**: Configured immediately out-of-the-box to use `MiniMax M2.5 Free`.
+
+---
+
+## 16. 📝 Revision History
 | Date       | Change                               | Reason                     |
 |------------|--------------------------------------|----------------------------|
 | 2026-03-08 | Initial creation                     |                            |
 |            | Added browser timeouts               | Slow page loads            |
 |            | Approval for git push                | Prevent accidental pushes  |
 |            | Skill reuse examples                 | Redundant skills           |
+|            | NPM distribution update              | Portable npx deployment    |

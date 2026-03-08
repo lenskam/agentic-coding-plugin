@@ -4,6 +4,7 @@ agent:
   planning: true
   max_files_per_edit: 5
   ask_confirmation: true
+  default_model: "MiniMax M2.5 Free"
 
 execution:
   allow_shell: true
@@ -13,6 +14,7 @@ plugins_path: .opencode/plugins
 skills_path: skills
 workflows_path: workflows
 rules_file: .opencode/rules.md
+artifacts_path: artifacts
 
 startup_plugins:
   - antigravity-plugin
