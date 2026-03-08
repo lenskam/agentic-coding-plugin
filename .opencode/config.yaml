@@ -1,0 +1,18 @@
+model: gpt-4o
+
+agent:
+  planning: true
+  max_files_per_edit: 5
+  ask_confirmation: true
+
+execution:
+  allow_shell: true
+  allow_git: true
+
+plugins_path: .opencode/plugins
+skills_path: skills
+workflows_path: workflows
+rules_file: .opencode/rules.md
+
+startup_plugins:
+  - antigravity-plugin

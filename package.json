@@ -1,0 +1,22 @@
+{
+  "name": "agentic-coding-plugin",
+  "version": "1.0.0",
+  "description": "Local, autonomous coding assistant framework built for OpenCode.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix",
+    "format": "prettier --write .",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "verify": "node config/verify-setup.js"
+  },
+  "dependencies": {
+    "playwright": "^1.58.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "jest": "^29.0.0",
+    "prettier": "^3.0.0"
+  }
+}

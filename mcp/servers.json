@@ -1,0 +1,26 @@
+[
+  {
+    "name": "filesystem",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-filesystem", "."],
+    "env": {}
+  },
+  {
+    "name": "brave-search",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+    "env": { "BRAVE_API_KEY": "${BRAVE_API_KEY}" }
+  },
+  {
+    "name": "github",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-github"],
+    "env": { "GITHUB_TOKEN": "${GITHUB_TOKEN}" }
+  },
+  {
+    "name": "playwright",
+    "command": "npx",
+    "args": ["-y", "@playwright/mcp"],
+    "env": {}
+  }
+]
