@@ -1,10 +1,10 @@
 {
-  "name": "@lenskamdem/agentic-coding-plugin",
+  "name": "@lens.kamdem/agentic-coding-plugin",
   "version": "1.0.0",
   "description": "Local, autonomous coding assistant framework built for OpenCode.",
   "main": "index.js",
   "bin": {
-    "agentic-coding-plugin": "./bin/install.js"
+    "agentic-coding-plugin": "bin/install.js"
   },
   "scripts": {
     "lint": "eslint . --ext .js",
