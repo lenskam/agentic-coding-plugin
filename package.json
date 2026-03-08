@@ -1,5 +1,5 @@
 {
-  "name": "agentic-coding-plugin",
+  "name": "@lenskamdem/agentic-coding-plugin",
   "version": "1.0.0",
   "description": "Local, autonomous coding assistant framework built for OpenCode.",
   "main": "index.js",

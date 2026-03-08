@@ -10,8 +10,9 @@ You can install this plugin into any OpenCode project to instantly grant it auto
 npx agentic-coding-plugin install
 ```
 
-This will copy all the core logic (`skills/`, `workflows/`, `tasks/`, `rules/`, `memory/`, `artifacts/`, and `.opencode/`) directly into your current workspace.
+This will keep your project root clean by placing all the complex core logic (`skills/`, `workflows/`, `tasks/`, `rules/`, `memory/`, `artifacts/`, etc.) safely inside a hidden `.agentic-coding/` directory.
 
+It will also install an `.opencode/` folder at your project root containing the configuration hooks dynamically pre-configured to point to the `.agentic-coding/` framework!
 ## Setup
 1. Once installed, adjust `.env.example` to `.env` and fill in necessary API keys if utilizing the specific MCP servers.
 2. Run the `opencode` CLI in that directory. 
