@@ -4,7 +4,7 @@ agent:
   planning: true
   max_files_per_edit: 5
   ask_confirmation: true
-  default_model: "MiniMax M2.5 Free"
+  default_model: "Kimi"
 
 execution:
   allow_shell: true

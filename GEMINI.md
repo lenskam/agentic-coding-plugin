@@ -33,8 +33,8 @@ View file @file:docs/dev/TECH_DEFS.md
 - **Runtime**: Node.js 18+, Python 3.9+  
 - **Agent Framework**: OpenCode (configurable)  
 - **Browser Automation**: Playwright (MCP)  
-- **LLM**: Local (Ollama) or free API (DeepSeek/Kimi via OpenRouter)  
-- **MCP Servers**: filesystem, brave-search, github, playwright  
+- **LLM**: Kimi (native primary), Groq (default LLM API for tasks), Gemini Flash (for defined edge cases)
+- **MCP Servers**: filesystem, tavily (search), github, playwright  
 - **Git**: Git + GitHub CLI (`gh`)  
 - **Persistence**: JSON files (`memory/session.json`, `tasks/current.json`); optional vector search (ChromaDB)
 
@@ -126,7 +126,7 @@ Plugin updates via git.
 
 ## 13. 🔌 MCP Integration
 **Servers** (in `mcp/servers.json`):
-- filesystem, brave-search (needs API key), github (needs token), playwright.  
+- filesystem, tavily (needs API key), github (needs token), playwright.  
 **Automated Workflow**: Request → `/plan` → execute skills → approvals → report/PR.
 
 ---
@@ -149,7 +149,7 @@ This framework can be dynamically installed via NPM: `npx agentic-coding-plugin`
 1. **Core Scaffolding**: It copies `memory/`, `skills/`, `tasks/`, `rules/`, `workflows/`, `mcp/`, `browser/`, `artifacts/`, and `.opencode/` logic into the root user directory dynamically.
 2. **Execution**: The `.opencode/config.yaml` points native workflows at the new path locations seamlessly for the user.
 3. **Artifact Integration**: Antigravity-like markdown artifacts are persisted into the `artifacts/` folder utilizing the custom `skills/memory/create_artifact.js` tool.
-4. **Default LLM**: Configured immediately out-of-the-box to use `MiniMax M2.5 Free`.
+4. **Default LLM**: Configured immediately out-of-the-box to use `Kimi`.
 
 ---
 

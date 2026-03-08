@@ -16,4 +16,4 @@ This will copy all the core logic (`skills/`, `workflows/`, `tasks/`, `rules/`, 
 1. Once installed, adjust `.env.example` to `.env` and fill in necessary API keys if utilizing the specific MCP servers.
 2. Run the `opencode` CLI in that directory. 
 
-The `.opencode/config.yaml` natively boots the `MiniMax M2.5 Free` model, loads the required plugin instructions, syncs the persistence loop via the `artifacts/` folder tools, and applies strict user-approval shell execution rules.
+The `.opencode/config.yaml` natively boots the `Kimi` model, loads the required plugin instructions, syncs the persistence loop via the `artifacts/` folder tools, and applies strict user-approval shell execution rules.
