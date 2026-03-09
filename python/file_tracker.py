@@ -76,8 +76,7 @@ class FileTracker:
         
         if row:
             change_id, file_path, original_content = row
-            # Normally we'd write to Disk here synchronously in actual plugin tools, 
-            # here we return the metadata for completion.
+            # Return metadata; actual file write should be handled by the caller
             cursor.execute('DELETE FROM file_changes WHERE id = ?', (change_id,))
             conn.commit()
             conn.close()
@@ -85,6 +84,29 @@ class FileTracker:
         
         conn.close()
         return None
+
+    def revert_session(self, session_id: str):
+        """Reverts all changes recorded for a specific session in reverse order."""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        # Order by timestamp DESC to revert newer changes first
+        cursor.execute('''
+            SELECT file_path, original_content 
+            FROM file_changes 
+            WHERE session_id = ? 
+            ORDER BY timestamp DESC
+        ''', (session_id,))
+        rows = cursor.fetchall()
+        
+        reverts = []
+        for file_path, original_content in rows:
+            reverts.append({"file": file_path, "original": original_content})
+            
+        # Clear changes after preparing revert list
+        cursor.execute('DELETE FROM file_changes WHERE session_id = ?', (session_id,))
+        conn.commit()
+        conn.close()
+        return reverts
 
 if __name__ == "__main__":
     # Test tracking logic locally

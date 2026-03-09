@@ -15,7 +15,7 @@ const agenticDir = path.join(targetDir, agenticDirName);
 const installationMap = [
   // Core implementation
   { src: "python", dest: path.join(agenticDirName, "python") },
-  { src: "src/tools/core", dest: ".opencode/tools" },
+  { src: "dist/tools/core", dest: ".opencode/tools" },
 
   // Templates/Project files
   { src: "templates/rules", dest: ".opencode/rules" },
@@ -99,6 +99,11 @@ function copyRecursiveSync(src, dest, transform = false) {
       );
     });
   } else {
+    // Skip TypeScript declaration and map files
+    if (absoluteSrc.endsWith(".d.ts") || absoluteSrc.endsWith(".js.map")) {
+      return;
+    }
+
     const parentDir = path.dirname(absoluteDest);
     if (!fs.existsSync(parentDir)) {
       fs.mkdirSync(parentDir, { recursive: true });
