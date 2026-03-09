@@ -1,6 +1,7 @@
 import os
 import re
 import yaml
+import ast
 from dataclasses import dataclass
 from typing import List, Optional, Dict
 
@@ -82,23 +83,72 @@ class RulesEngine:
         if not condition:
             return False
             
-        # 1. Direct command match (e.g., 'git commit')
+        # 1. AST-level check for Python files
+        if "AST contains" in condition:
+            # Format: "AST contains 'Call(eval)'" or "AST contains 'Import(os)'"
+            match = re.search(r"AST contains '(.*?)'", condition)
+            if match:
+                pattern = match.group(1)
+                content = context.get("content", "")
+                if not content:
+                    return False
+                
+                checker = PythonASTChecker(content)
+                if pattern.startswith("Call("):
+                    func_name = pattern[5:-1]
+                    return checker.find_call(func_name)
+                if pattern.startswith("Import("):
+                    module_name = pattern[7:-1]
+                    return checker.find_import(module_name)
+
+        # 2. Direct command match (e.g., 'git commit')
         if condition.lower() in action.lower():
             # Check for additional context rules like 'and file contains'
             if "and file contains" in condition:
                 pattern_match = re.search(r"contains '(.*?)'", condition)
                 if pattern_match:
                     pattern = pattern_match.group(1)
-                    # For simplicity in Phase 3, we check the action string or a 'content' key in context
                     target_text = context.get("content", action)
                     return bool(re.search(pattern, target_text))
             return True
 
-        # 2. Key-based match (e.g., 'rm or deploy')
+        # 3. Key-based match (e.g., 'rm or deploy')
         if " or " in condition:
             parts = [p.strip() for p in condition.split(" or ")]
             return any(p.lower() in action.lower() for p in parts)
 
+        return False
+
+class PythonASTChecker:
+    """Helper for analyzing Python code via AST."""
+    def __init__(self, code: str):
+        try:
+            self.tree = ast.parse(code)
+        except Exception:
+            self.tree = None
+
+    def find_call(self, func_name: str) -> bool:
+        if not self.tree: return False
+        for node in ast.walk(self.tree):
+            if isinstance(node, ast.Call):
+                # Simple function call: eval()
+                if isinstance(node.func, ast.Name) and node.func.id == func_name:
+                    return True
+                # Attribute call: os.system()
+                if isinstance(node.func, ast.Attribute) and node.func.attr == func_name:
+                    return True
+        return False
+
+    def find_import(self, module_name: str) -> bool:
+        if not self.tree: return False
+        for node in ast.walk(self.tree):
+            if isinstance(node, ast.Import):
+                for alias in node.names:
+                    if alias.name == module_name:
+                        return True
+            if isinstance(node, ast.ImportFrom):
+                if node.module == module_name:
+                    return True
         return False
 
 if __name__ == "__main__":

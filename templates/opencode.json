@@ -12,7 +12,10 @@
   },
   "tools": {
     "executionPath": ".opencode/tools",
-    "verifySetup": "node .opencode/tools/verify-setup.js"
+    "verifySetup": "node .opencode/tools/verify-setup.js",
+    "search": "node .opencode/tools/commands/search.js",
+    "plan": "node .opencode/tools/commands/plan_task.js",
+    "checkRules": "node .opencode/tools/commands/check_rules.js"
   },
   "mcp": {
     "servers": ".opencode/mcp-servers.json"

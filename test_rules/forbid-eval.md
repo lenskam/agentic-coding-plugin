@@ -1,0 +1,1 @@
+---\nname: forbid-eval\ncondition: "AST contains 'Call(eval)'"\naction: block\n---\nDanger!
