@@ -1,7 +1,7 @@
 {
   "name": "@lens.kamdem/agentic-coding-plugin",
-  "version": "1.0.0",
-  "description": "Local, autonomous coding assistant framework built for OpenCode.",
+  "version": "1.1.0",
+  "description": "Local, autonomous coding assistant framework (inspired from Antigravity) built for OpenCode.",
   "main": "index.js",
   "keywords": [
     "opencode",
@@ -14,7 +14,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lenskam/agentic-coding-plugin.git"
+    "url": "git+https://github.com/lenskam/agentic-coding-plugin.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "bugs": {
     "url": "https://github.com/lenskam/agentic-coding-plugin/issues"
