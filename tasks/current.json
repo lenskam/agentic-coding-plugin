@@ -1,9 +1,0 @@
-[
-  {
-    "id": "verify-1",
-    "title": "Launch OpenCode",
-    "description": "Start the newly framed agent",
-    "status": "pending",
-    "dependencies": []
-  }
-]

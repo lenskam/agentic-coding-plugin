@@ -4,15 +4,15 @@
   "description": "Local, autonomous coding assistant framework built for OpenCode.",
   "main": "index.js",
   "bin": {
-    "agentic-coding-plugin": "bin/install.js"
+    "agentic-coding-plugin": "src/cli/install.js"
   },
   "scripts": {
-    "lint": "eslint . --ext .js",
-    "lint:fix": "eslint . --ext .js --fix",
-    "format": "prettier --write .",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "eslint src/**/*.js --fix",
+    "format": "prettier --write src/**/*.js",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "verify": "node config/verify-setup.js"
+    "verify": "node src/tools/core/verify-setup.js"
   },
   "dependencies": {
     "playwright": "^1.58.2"

@@ -50,3 +50,4 @@ env/
 
 # dev
 docs/dev/
+.agentic-coding/
