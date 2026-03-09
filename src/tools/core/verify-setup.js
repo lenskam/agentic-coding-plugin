@@ -3,15 +3,17 @@ const path = require('path');
 
 // Logic for detecting environment: plugin development vs. installed project
 const isPluginDev = fs.existsSync(path.join(__dirname, '../../../package.json')) && 
-                    require(path.join(__dirname, '../../../package.json')).name === '@lens.kamdem/agentic-coding-plugin';
+                    require(path.join(__dirname, '../../../package.json')).name === '@lenskam/agentic-coding-plugin';
 
 let opencodeDir, targetDir, agenticDir;
 
 if (isPluginDev) {
   targetDir = path.join(__dirname, '../../../');
   opencodeDir = path.join(targetDir, 'templates'); // In dev, we check the templates
-  agenticDir = path.join(targetDir); // In dev, python/ and tasks/ are at root
+  agenticDir = targetDir; // In dev, python/ and templates/tasks are at root
 } else {
+  // Assuming this script is running inside .opencode/tools/core/ (after install.js)
+  // Or in a context where it's part of the package.
   opencodeDir = path.join(__dirname, '..');
   targetDir = path.join(opencodeDir, '..');
   agenticDir = path.join(targetDir, '.agentic-coding');

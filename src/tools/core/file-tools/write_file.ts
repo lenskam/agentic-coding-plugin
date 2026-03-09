@@ -1,24 +1,24 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
+import * as fs from 'fs';
+import * as path from 'path';
 
-const filePath = process.argv[2];
+const filePath: string | undefined = process.argv[2];
 
 if (!filePath) {
-  console.error("Usage: node write_file.js <file_path>");
+  console.error("Usage: ts-node write_file.ts <file_path>");
   console.error("Content should be piped via STDIN.");
   process.exit(1);
 }
 
-const absolutePath = path.resolve(process.cwd(), filePath);
-const dir = path.dirname(absolutePath);
+const absolutePath: string = path.resolve(process.cwd(), filePath);
+const dir: string = path.dirname(absolutePath);
 
-let content = '';
+let content: string = '';
 process.stdin.setEncoding('utf8');
 
 process.stdin.on('readable', () => {
-  let chunk;
+  let chunk: any;
   while ((chunk = process.stdin.read()) !== null) {
     content += chunk;
   }
@@ -32,13 +32,13 @@ process.stdin.on('end', () => {
     fs.writeFileSync(absolutePath, content, 'utf8');
     console.log(`Successfully wrote ${content.length} bytes to ${filePath}`);
     process.exit(0);
-  } catch (error) {
+  } catch (error: any) {
     console.error(`Error writing file: ${error.message}`);
     process.exit(1);
   }
 });
 
-process.stdin.on('error', (error) => {
+process.stdin.on('error', (error: any) => {
   console.error(`Error reading from stdin: ${error.message}`);
   process.exit(1);
 });
