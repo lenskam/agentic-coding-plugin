@@ -3,9 +3,34 @@
   "version": "1.0.0",
   "description": "Local, autonomous coding assistant framework built for OpenCode.",
   "main": "index.js",
-  "bin": {
-    "agentic-coding-plugin": "src/cli/install.js"
+  "keywords": [
+    "opencode",
+    "agentic",
+    "autonomous",
+    "ai",
+    "coding-assistant"
+  ],
+  "author": "Lenskam",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lenskam/agentic-coding-plugin.git"
   },
+  "bugs": {
+    "url": "https://github.com/lenskam/agentic-coding-plugin/issues"
+  },
+  "homepage": "https://github.com/lenskam/agentic-coding-plugin#readme",
+  "bin": {
+    "agentic-coding": "src/cli/install.js"
+  },
+  "files": [
+    "dist",
+    "python",
+    "templates",
+    "GEMINI.md",
+    "package.json",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
     "prebuild": "rimraf dist",
