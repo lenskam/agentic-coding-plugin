@@ -1,6 +1,6 @@
 {
   "name": "@lens.kamdem/agentic-coding-plugin",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "Local, autonomous coding assistant framework (inspired from Antigravity) built for OpenCode.",
   "main": "index.js",
   "keywords": [
@@ -42,7 +42,7 @@
     "format": "prettier --write src/**/*.ts",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "verify": "node src/tools/core/verify-setup.js"
+    "verify": "node .opencode/tools/verify_setup.js"
   },
   "dependencies": {
     "playwright": "^1.58.2"

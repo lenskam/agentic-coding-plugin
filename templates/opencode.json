@@ -12,10 +12,11 @@
   },
   "tools": {
     "executionPath": ".opencode/tools",
-    "verifySetup": "node .opencode/tools/verify-setup.js",
+    "verifySetup": "node .opencode/tools/verify_setup.js",
     "search": "node .opencode/tools/commands/search.js",
     "plan": "node .opencode/tools/commands/plan_task.js",
-    "checkRules": "node .opencode/tools/commands/check_rules.js",
+    "checkRules": "node .opencode/tools/check_rules.js",
+    "verify": "node .opencode/tools/verify_setup.js",
     "showChanges": "node .opencode/tools/commands/show_changes.js",
     "undoPreview": "node .opencode/tools/commands/undo_preview.js",
     "undoConfirm": "node .opencode/tools/commands/undo_confirm.js"
