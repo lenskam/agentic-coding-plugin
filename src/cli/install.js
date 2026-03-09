@@ -25,9 +25,6 @@ const installationMap = [
   { src: "templates/mcp-servers.json", dest: ".opencode/mcp-servers.json" },
   { src: "templates/tasks", dest: path.join(agenticDirName, "tasks") },
   { src: "templates/opencode.json", dest: "opencode.json" },
-
-  // Root files
-  { src: "GEMINI.md", dest: "GEMINI.md" },
 ];
 
 /**
@@ -150,7 +147,6 @@ runtimeDirs.forEach((dir) => {
 console.log("\n--- Installation complete ---");
 console.log(`-> Core logic and state: ./${agenticDirName}/`);
 console.log("-> OpenCode integration: ./.opencode/");
-console.log("-> Root rules: ./GEMINI.md");
 console.log("\nNext steps:");
 console.log("1. Ensure Python 3.9+ is installed.");
 console.log(`2. Initialize venv: python3 -m venv ./${agenticDirName}/venv`);
