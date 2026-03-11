@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import * as fs from 'fs';
-import * as path from 'path';
-import { execSync } from 'child_process';
+import * as fs from "fs";
+import * as path from "path";
+import { execSync } from "child_process";
 
 const filePath: string | undefined = process.argv[2];
 
@@ -15,42 +15,48 @@ if (!filePath) {
 const absolutePath: string = path.resolve(process.cwd(), filePath);
 const dir: string = path.dirname(absolutePath);
 
-let content: string = '';
-process.stdin.setEncoding('utf8');
+let content: string = "";
+process.stdin.setEncoding("utf8");
 
-process.stdin.on('readable', () => {
+process.stdin.on("readable", () => {
   let chunk: any;
   while ((chunk = process.stdin.read()) !== null) {
     content += chunk;
   }
 });
 
-process.stdin.on('end', () => {
+process.stdin.on("end", () => {
   try {
     // Capture original content for tracking
-    let originalContent = '';
+    let originalContent = "";
     if (fs.existsSync(absolutePath)) {
-      originalContent = fs.readFileSync(absolutePath, 'utf8');
+      originalContent = fs.readFileSync(absolutePath, "utf8");
     }
 
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
     }
-    fs.writeFileSync(absolutePath, content, 'utf8');
+    fs.writeFileSync(absolutePath, content, "utf8");
 
     // Track the change
     try {
-      const sessionId = process.env.SESSION_ID || 'default-session';
-      const pythonPath = process.platform === 'win32' ? '.agentic-coding/venv/Scripts/python.exe' : '.agentic-coding/venv/bin/python3';
-      
+      const sessionId = process.env.SESSION_ID || "default-session";
+      const pythonPath =
+        process.platform === "win32"
+          ? ".agentic-coding/venv/Scripts/python.exe"
+          : ".agentic-coding/venv/bin/python3";
+
       // Use execSync to call python/main.py track-file
       // Escape content for shell
       const escapedOriginal = JSON.stringify(originalContent);
       const escapedNew = JSON.stringify(content);
-      
-      execSync(`${pythonPath} python/main.py track-file "${sessionId}" "${filePath}" ${escapedOriginal} ${escapedNew}`, {
-        stdio: 'ignore'
-      });
+
+      execSync(
+        `${pythonPath} .agentic-coding/python/main.py track-file "${sessionId}" "${filePath}" ${escapedOriginal} ${escapedNew}`,
+        {
+          stdio: "ignore",
+        },
+      );
     } catch (trackError) {
       // Silently fail tracking if it fails, don't block the write
       console.warn(`Warning: Failed to track file change: ${trackError}`);
@@ -64,7 +70,7 @@ process.stdin.on('end', () => {
   }
 });
 
-process.stdin.on('error', (error: any) => {
+process.stdin.on("error", (error: any) => {
   console.error(`Error reading from stdin: ${error.message}`);
   process.exit(1);
 });

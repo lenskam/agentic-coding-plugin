@@ -5,14 +5,20 @@
  * Usage: node show_changes.js
  */
 
-import { execSync } from 'child_process';
-import * as path from 'path';
+import { execSync } from "child_process";
+import * as path from "path";
 
-const sessionId = process.env.SESSION_ID || 'default-session';
-const pythonPath = process.platform === 'win32' ? '.agentic-coding/venv/Scripts/python.exe' : '.agentic-coding/venv/bin/python3';
+const sessionId = process.env.SESSION_ID || "default-session";
+const pythonPath =
+  process.platform === "win32"
+    ? ".agentic-coding/venv/Scripts/python.exe"
+    : ".agentic-coding/venv/bin/python3";
 
 try {
-  const output = execSync(`${pythonPath} python/main.py session-changes "${sessionId}"`, { encoding: 'utf8' });
+  const output = execSync(
+    `${pythonPath} .agentic-coding/python/main.py session-changes "${sessionId}"`,
+    { encoding: "utf8" },
+  );
   const changes = JSON.parse(output);
 
   if (!Array.isArray(changes) || changes.length === 0) {

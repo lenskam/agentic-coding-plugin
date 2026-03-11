@@ -5,19 +5,27 @@
  * Usage: node undo_preview.js
  */
 
-import { execSync } from 'child_process';
+import { execSync } from "child_process";
 
-const sessionId = process.env.SESSION_ID || 'default-session';
-const pythonPath = process.platform === 'win32' ? '.agentic-coding/venv/Scripts/python.exe' : '.agentic-coding/venv/bin/python3';
+const sessionId = process.env.SESSION_ID || "default-session";
+const pythonPath =
+  process.platform === "win32"
+    ? ".agentic-coding/venv/Scripts/python.exe"
+    : ".agentic-coding/venv/bin/python3";
 
 try {
-  const output = execSync(`${pythonPath} python/main.py session-changes "${sessionId}"`, { encoding: 'utf8' });
+  const output = execSync(
+    `${pythonPath} .agentic-coding/python/main.py session-changes "${sessionId}"`,
+    { encoding: "utf8" },
+  );
   const changes = JSON.parse(output);
 
   if (!Array.isArray(changes) || changes.length === 0) {
     console.log("Nothing to undo.");
   } else {
-    console.log(`PREVIEW: Reverting the following changes for session ${sessionId}:`);
+    console.log(
+      `PREVIEW: Reverting the following changes for session ${sessionId}:`,
+    );
     changes.forEach((c: any, i: number) => {
       console.log(`\n[REVERT] ${c.file}`);
       console.log(c.diff);

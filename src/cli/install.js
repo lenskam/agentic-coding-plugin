@@ -45,31 +45,28 @@ const opencodeDirs = [
 function transformContent(content, destPath) {
   let newContent = content;
 
-  // Replace logic: Ensure paths in opencode.json or scripts point to .agentic-coding/ or .opencode/ correctly
   const folderMappings = {
-    python: `${agenticDirName}/python`,
-    tasks: `${agenticDirName}/tasks`,
-    memory: `${agenticDirName}/memory`,
-    artifacts: `${agenticDirName}/artifacts`,
-    rules: ".opencode/rules",
-    workflows: ".opencode/workflows",
-    skills: ".opencode/skills",
-    prompts: ".opencode/prompts",
+    ".agentic-coding/": ".agentic-coding/",
+    ".opencode/": ".opencode/",
+    "artifacts/": ".agentic-coding/artifacts/",
+    "memory/": ".agentic-coding/memory/",
+    "rules/": ".opencode/rules/",
+    "workflows/": ".opencode/workflows/",
+    "skills/": ".opencode/skills/",
+    "prompts/": ".opencode/prompts/",
+    "tasks/": ".agentic-coding/tasks/",
+    "python/": ".agentic-coding/python/",
   };
 
-  Object.entries(folderMappings).forEach(([oldDir, newDir]) => {
-    const regex = new RegExp(`\\b${oldDir}\\/`, "g");
-    newContent = newContent.replace(regex, (match, offset, fullString) => {
-      const charBefore = fullString[offset - 1];
-      if (
-        charBefore === "/" ||
-        fullString.substring(offset - agenticDirName.length - 1, offset) ===
-          `${agenticDirName}/`
-      ) {
-        return match;
-      }
-      return `${newDir}/`;
-    });
+  const sortedKeys = Object.keys(folderMappings).sort(
+    (a, b) => b.length - a.length,
+  );
+
+  sortedKeys.forEach((oldDir) => {
+    const newDir = folderMappings[oldDir];
+    if (oldDir === newDir) return;
+    const regex = new RegExp(oldDir.replace(/\//g, "\\/"), "g");
+    newContent = newContent.replace(regex, newDir);
   });
 
   return newContent;
@@ -110,9 +107,7 @@ function copyRecursiveSync(src, dest, transform = false) {
       transform &&
       (absoluteDest.endsWith(".yaml") ||
         absoluteDest.endsWith(".md") ||
-        absoluteDest.endsWith(".json") ||
-        absoluteDest.endsWith(".js") ||
-        absoluteDest.endsWith(".sh"))
+        absoluteDest.endsWith(".json"))
     ) {
       let content = fs.readFileSync(absoluteSrc, "utf8");
       content = transformContent(content, absoluteDest);

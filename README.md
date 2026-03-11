@@ -23,9 +23,9 @@ npx @lens.kamdem/agentic-coding-plugin
 ```
 
 ### What happens during installation?
+
 1.  **Core Logic**: All complex backend logic is placed in a hidden `.agentic-coding/` directory.
 2.  **Configuration**: An `.opencode/` folder is created at your project root, pre-configured to hook into the Antigravity framework.
-3.  **Clean Root**: Your project root remains clean; only the configuration files and `GEMINI.md` are added.
 
 ---
 
@@ -51,25 +51,35 @@ npx @lens.kamdem/agentic-coding-plugin
 The plugin exposes several custom tools and commands that you can use directly within your OpenCode sessions:
 
 #### 1. Task Planning (`/plan`)
+
 Ask the agent to plan a complex task. It will return a task graph.
+
 - **Command**: `/plan <request>`
 - **Example**: `/plan "Refactor the authentication module to use JWT and add unit tests"`
 
 #### 2. Status Tracking (`/status`)
+
 Check the progress of your current tasks.
+
 - **Command**: `/status`
 
 #### 3. Unified Search (`/search`)
+
 Perform a hybrid search across code and session memory.
+
 - **Command**: `/search <query>`
 - **Example**: `/search "How did we handle CORS in the last session?"`
 
 #### 4. Safety Audit (`/checkRules`)
+
 Manually trigger a rule check for a specific action.
+
 - **Command**: `/checkRules <action> --content <optional_code>`
 
 #### 5. Change Management & Undo
+
 Review your work and rollback if something goes wrong.
+
 - **`/changes show`**: View all diffs recorded in the current session.
 - **`/undo preview`**: See a summary of what will be reverted.
 - **`/undo confirm`**: Execute the rollback (restores files and deletes newly created ones).
@@ -81,6 +91,7 @@ Review your work and rollback if something goes wrong.
 Rules are defined as Markdown files with YAML frontmatter in `.opencode/rules/`.
 
 Example rule (`.opencode/rules/no-eval.md`):
+
 ```yaml
 ---
 name: forbid-eval

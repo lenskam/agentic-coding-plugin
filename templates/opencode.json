@@ -1,36 +1,31 @@
 {
-  "project": "Agentic Coding Project",
-  "llm": {
-    "provider": "openrouter",
-    "model": "google/gemini-2.0-flash-001",
-    "apiKey": "${LLM_API_KEY}"
-  },
-  "agent": {
-    "systemPrompt": ".opencode/prompts/system-prompt.md",
-    "autoApprove": false,
-    "maxIterations": 10
-  },
-  "tools": {
-    "executionPath": ".opencode/tools",
-    "verifySetup": "node .opencode/tools/verify_setup.js",
-    "search": "node .opencode/tools/commands/search.js",
-    "plan": "node .opencode/tools/commands/plan_task.js",
-    "checkRules": "node .opencode/tools/check_rules.js",
-    "verify": "node .opencode/tools/verify_setup.js",
-    "showChanges": "node .opencode/tools/commands/show_changes.js",
-    "undoPreview": "node .opencode/tools/commands/undo_preview.js",
-    "undoConfirm": "node .opencode/tools/commands/undo_confirm.js"
-  },
-  "mcp": {
-    "servers": ".opencode/mcp-servers.json"
-  },
-  "rules": {
-    "path": ".opencode/rules"
-  },
-  "workflows": {
-    "path": ".opencode/workflows"
-  },
+  "$schema": "https://opencode.ai/config.json",
+  "model": "opencode/zen",
+  "small_model": "opencode/zen",
   "skills": {
-    "path": ".opencode/skills"
+    "paths": [".opencode/skills"]
+  },
+  "command": {
+    "verify": {
+      "template": "node .opencode/tools/verify_setup.js"
+    },
+    "search": {
+      "template": "node .opencode/tools/commands/search.js"
+    },
+    "plan": {
+      "template": "node .opencode/tools/commands/plan_task.js"
+    },
+    "checkRules": {
+      "template": "node .opencode/tools/check_rules.js"
+    },
+    "showChanges": {
+      "template": "node .opencode/tools/commands/show_changes.js"
+    },
+    "undoPreview": {
+      "template": "node .opencode/tools/commands/undo_preview.js"
+    },
+    "undoConfirm": {
+      "template": "node .opencode/tools/commands/undo_confirm.js"
+    }
   }
 }
